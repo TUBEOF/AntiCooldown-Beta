@@ -93,7 +93,7 @@ public class Main extends JavaPlugin {
 
     private void getTubeTils() {
         try {
-            URL url = new URL("https://repo.tubeof.de/de/tubeof/tubetils/1.0.0/TubeTils.jar");
+            URL url = new URL("https://repo.tubeof.de/de/tubeof/tubetils/SNAPSHOT-412/tubetils-SNAPSHOT-412.jar");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int filesize = connection.getContentLength();
 

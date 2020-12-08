@@ -44,7 +44,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aThe Plugin will be activated ...");
 
-        ccs.sendMessage("§cWARNING! THIS IS A BETA BUILD!");
+        ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cWARNING! THIS IS A BETA BUILD!");
 
         main = this;
 

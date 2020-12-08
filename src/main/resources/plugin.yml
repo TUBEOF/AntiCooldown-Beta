@@ -2,7 +2,7 @@ name: AntiCooldown
 version: 3.6.3
 api-version: 1.13
 softdepend: [TubeTils]
-main: de.tubeof.ac.main.Main
+main: de.tubeof.ac.beta.main.Main
 commands:
   anticooldown:
     usage: </command>

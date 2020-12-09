@@ -183,7 +183,7 @@ public class Main extends JavaPlugin {
         }
 
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aChecking for updates ...");
-        UpdateChecker updateChecker = new UpdateChecker(51321, this);
+        UpdateChecker updateChecker = new UpdateChecker("AntiCooldown-Beta", this);
 
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.UP_TO_DATE) {
             data.setUpdateAvailable(false);
@@ -192,7 +192,9 @@ public class Main extends JavaPlugin {
         }
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.OUT_DATED) {
             data.setUpdateAvailable(true);
-            if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found! Download here: " + updateChecker.getResourceURL());
+            if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found!");
+
+            //DO DOWNLOAD
             return;
         }
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.UNRELEASED) {

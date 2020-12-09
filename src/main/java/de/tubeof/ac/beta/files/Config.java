@@ -68,6 +68,7 @@ public class Config {
         cfg.addDefault("Settings.DisabledWorlds", disabledWorlds);
 
         cfg.addDefault("ConfigVersion", 7);
+        cfg.addDefault("Build", 35);
 
         saveCFG();
         if (!file.exists()) {
@@ -94,6 +95,8 @@ public class Config {
         messages.setTextMessages(MessageType.ERROR_WORLD_NOT_LISTED, cfg.getString("Messages.Error.WorldAlreadyEnabled"));
         messages.setTextMessages(MessageType.ERROR_PLAYER_NOT_ONLINE, cfg.getString("Messages.Error.PlayerNotOnline"));
         messages.setTextMessages(MessageType.ERROR_NO_PERMISSIONS, cfg.getString("Messages.Error.NoPerms"));
+
+        messages.setTextMessages(MessageType.BUILD, cfg.getString("Build"));
 
         //Settings
         data.setBooleanSettings(SettingsType.USE_LOGIN_MESSAGES, cfg.getBoolean("Settings.Messages.UseLoginMessage"));
@@ -124,6 +127,11 @@ public class Config {
         }
 
         cfg.set("Settings.DisabledWorlds", disabledWorlds);
+        saveCFG();
+    }
+
+    public static void updateBuild(String installedBuild) {
+        cfg.set("Build", installedBuild);
         saveCFG();
     }
 }

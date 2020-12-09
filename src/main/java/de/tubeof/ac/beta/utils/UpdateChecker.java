@@ -1,38 +1,48 @@
 package de.tubeof.ac.beta.utils;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import de.tubeof.ac.beta.data.Messages;
+import de.tubeof.ac.beta.enums.MessageType;
+import de.tubeof.ac.beta.main.Main;
 import org.bukkit.plugin.Plugin;
 
-import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class UpdateChecker {
 
-    private int resourceId;
-    private URL resourceURL;
-    private String currentVersionString;
-    private String latestVersionString;
+    private final Messages messages = Main.getMessages();
+
+    private String resourceName;
+    private URL resourceRestApiUrl;
+    private String currentBuild;
+    private String latestBuild;
     private UpdateCheckResult updateCheckResult;
 
-    public UpdateChecker(Integer resourceId, Plugin plugin) {
+    public UpdateChecker(String resourceName, Plugin plugin) {
         try {
-            this.resourceId = resourceId;
-            this.resourceURL = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resourceId);
+            this.resourceName = resourceName;
+            this.resourceRestApiUrl = new URL("https://jenkins.tubeof.de/job/" + resourceName + "/lastSuccessfulBuild/api/json?pretty=true");
         } catch (Exception exception) {
             return;
         }
 
-        currentVersionString = plugin.getDescription().getVersion();
-        latestVersionString = getLatestVersion();
+        fetchLatestBuild();
 
-        if (latestVersionString == null) {
+        currentBuild = messages.getTextMessage(MessageType.BUILD);
+        latestBuild = getLatestBuild();
+
+        if (latestBuild == null) {
             updateCheckResult = UpdateCheckResult.NO_RESULT;
             return;
         }
 
-        int currentVersion = Integer.parseInt(currentVersionString.replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
-        int latestVersion = Integer.parseInt(getLatestVersion().replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
+        int currentVersion = Integer.parseInt(currentBuild.replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
+        int latestVersion = Integer.parseInt(getLatestBuild().replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
 
         if (currentVersion != latestVersion) updateCheckResult = UpdateCheckResult.OUT_DATED;
         else if (currentVersion == latestVersion) updateCheckResult = UpdateCheckResult.UP_TO_DATE;
@@ -43,32 +53,38 @@ public class UpdateChecker {
         NO_RESULT, OUT_DATED, UP_TO_DATE, UNRELEASED,
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public String getResourceURL() {
-        return "https://www.spigotmc.org/resources/" + resourceId;
+    public URL getResourceRestApiUrl() {
+        return resourceRestApiUrl;
     }
 
-    public String getCurrentVersionString() {
-        return currentVersionString;
+    public String getCurrentBuild() {
+        return currentBuild;
     }
 
-    public String getLatestVersionString() {
-        return latestVersionString;
+    public String getLatestBuild() {
+        return latestBuild;
     }
 
     public UpdateCheckResult getUpdateCheckResult() {
         return updateCheckResult;
     }
 
-    public String getLatestVersion() {
+    public void fetchLatestBuild() {
         try {
-            URLConnection urlConnection = resourceURL.openConnection();
-            return new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).readLine();
+            URLConnection urlConnection = getResourceRestApiUrl().openConnection();
+            urlConnection.connect();
+
+            JsonParser jp = new JsonParser();
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) urlConnection.getContent()));
+            JsonObject rootobj = root.getAsJsonObject();
+            latestBuild = rootobj.get("number").getAsString();
+
         } catch (Exception exception) {
-            return null;
+            exception.printStackTrace();
         }
     }
 }

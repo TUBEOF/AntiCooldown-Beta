@@ -1,6 +1,6 @@
 name: AntiCooldown
 version: 3.6.3
-api-version: 1.13
+api-version: 1.14
 softdepend: [TubeTils]
 main: de.tubeof.ac.beta.main.Main
 commands:

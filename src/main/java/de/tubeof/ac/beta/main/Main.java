@@ -56,11 +56,6 @@ public class Main extends JavaPlugin {
         checkTubeTils();
         TubeTils.Properties.setDebuggingStatus(false);
 
-        cacheContainer = new CacheContainer("AntiCooldownCacheContainerInstance");
-        getCacheContainer().registerCacheType(String.class);
-        getCacheContainer().registerCacheType(Integer.class);
-        getCacheContainer().registerCacheType(Boolean.class);
-
         manageConfigs();
         registerListener();
         registerCommands();

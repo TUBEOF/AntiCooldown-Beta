@@ -193,8 +193,50 @@ public class Main extends JavaPlugin {
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.OUT_DATED) {
             data.setUpdateAvailable(true);
             if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found! You are using §eBuild " + updateChecker.getCurrentBuild() + "§c. Latest Build is §e" + updateChecker.getLatestBuild() + "§c!");
+            if(data.getBooleanSettings(SettingsType.UPDATE_AUTO_UPDATE)) {
 
-            //DO DOWNLOAD
+                try {
+                    URL url = new URL("https://jenkins.tubeof.de/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-jar-with-dependencies.jar");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
+                    connection.setRequestProperty("Header-Token", "SD998FS0FG07");
+                    int filesize = connection.getContentLength();
+
+                    Timer timer = new Timer();
+                    Thread thread = new Thread(() -> {
+                        TimerTask timerTask = new TimerTask() {
+                            @Override
+                            public void run() {
+                                ccs.sendMessage("Progress: " + (int)downloadProgress + "%");
+                            }
+                        };
+                        timer.schedule(timerTask, 0, 250);
+                    });
+                    thread.start();
+
+                    float totalDataRead = 0;
+                    java.io.BufferedInputStream in = new java.io.BufferedInputStream(connection.getInputStream());
+                    java.io.FileOutputStream fos = new java.io.FileOutputStream("plugins/AntiCooldown-Beta.jar");
+                    BufferedOutputStream bout = new BufferedOutputStream(fos,1024);
+                    byte[] data = new byte[1024];
+                    int i = 0;
+
+                    while((i=in.read(data,0,1024))>=0) {
+                        totalDataRead=totalDataRead+i;
+                        bout.write(data,0,i);
+                        downloadProgress = (totalDataRead*100) / filesize;
+                    }
+                    timer.cancel();
+                    thread.stop();
+                    ccs.sendMessage("Progress: " + (int)downloadProgress + "%");
+
+                    bout.close();
+                    in.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             return;
         }
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.UNRELEASED) {

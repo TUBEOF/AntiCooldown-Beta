@@ -69,7 +69,6 @@ public class Config {
         cfg.addDefault("Settings.DisabledWorlds", disabledWorlds);
 
         cfg.addDefault("ConfigVersion", 7);
-        cfg.addDefault("Build", 35);
 
         saveCFG();
         if (!file.exists()) {
@@ -108,7 +107,6 @@ public class Config {
         data.setIntegerSettings(SettingsType.ATTACK_SPEED_VALUE, cfg.getInt("Settings.Values.AttackSpeed"));
 
         data.setConfigVersion(cfg.getInt("ConfigVersion"));
-        data.setCurrentBuild(cfg.getInt("Build"));
 
         for (String disabledWorld : cfg.getStringList("Settings.DisabledWorlds")) {
             data.addDisableWorldToCache(disabledWorld);
@@ -128,11 +126,6 @@ public class Config {
         }
 
         cfg.set("Settings.DisabledWorlds", disabledWorlds);
-        saveCFG();
-    }
-
-    public static void updateBuild(String installedBuild) {
-        cfg.set("Build", installedBuild);
         saveCFG();
     }
 }

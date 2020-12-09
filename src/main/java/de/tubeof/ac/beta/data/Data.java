@@ -19,7 +19,6 @@ public class Data {
     private boolean disableSweepAttacks;
     private int attackSpeedValue;
     private int configVersion;
-    private int currentBuild;
     private ArrayList<String> disabledWorlds = new ArrayList<>();
 
     public void setBooleanSettings(SettingsType settingsType, boolean bol) {
@@ -29,6 +28,7 @@ public class Data {
         if(settingsType == SettingsType.UPDATE_NOTIFY_CONSOLE) updateNotifyConsole = bol;
         if(settingsType == SettingsType.UPDATE_NOTIFY_INGAME) updateNotifyIngame = bol;
         if(settingsType == SettingsType.DISABLE_SWEEP_ATTACK) disableSweepAttacks = bol;
+        if(settingsType == SettingsType.UPDATE_AUTO_UPDATE) updateAutoDownload = bol;
     }
 
     public void setIntegerSettings(SettingsType settingsType, int intValue) {
@@ -60,6 +60,7 @@ public class Data {
         if(settingsType == SettingsType.UPDATE_NOTIFY_INGAME) return updateNotifyIngame;
         if(settingsType == SettingsType.UPDATE_NOTIFY_CONSOLE) return updateNotifyConsole;
         if(settingsType == SettingsType.DISABLE_SWEEP_ATTACK) return disableSweepAttacks;
+        if(settingsType == SettingsType.UPDATE_AUTO_UPDATE) return updateAutoDownload;
 
         return true;
     }
@@ -88,13 +89,5 @@ public class Data {
 
     public int getConfigVersion() {
         return configVersion;
-    }
-
-    public void setCurrentBuild(int build) {
-        currentBuild = build;
-    }
-
-    public int getCurrentBuild() {
-        return currentBuild;
     }
 }

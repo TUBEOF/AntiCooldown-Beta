@@ -2,6 +2,7 @@ package de.tubeof.ac.beta.utils;
 
 import de.tubeof.ac.beta.data.Data;
 import de.tubeof.ac.beta.main.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public class UpdateChecker {
             return;
         }
 
-        currentBuild = data.getCurrentBuild();
+        currentBuild = Integer.valueOf(Main.getMain().getDescription().getVersion());
         latestBuild = fetchLatestBuild();
 
         if (latestBuild == null) {

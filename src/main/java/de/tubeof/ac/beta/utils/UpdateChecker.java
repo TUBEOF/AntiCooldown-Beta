@@ -1,17 +1,15 @@
 package de.tubeof.ac.beta.utils;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import de.tubeof.ac.beta.data.Messages;
 import de.tubeof.ac.beta.enums.MessageType;
 import de.tubeof.ac.beta.main.Main;
 import org.bukkit.plugin.Plugin;
+import org.json.JSONObject;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class UpdateChecker {
 
@@ -26,7 +24,7 @@ public class UpdateChecker {
     public UpdateChecker(String resourceName, Plugin plugin) {
         try {
             this.resourceName = resourceName;
-            this.resourceRestApiUrl = new URL("https://jenkins.tubeof.de/job/" + resourceName + "/lastSuccessfulBuild/api/json?pretty=true");
+            this.resourceRestApiUrl = new URL("https://jenkins.tubeof.de/job/" + resourceName + "/lastSuccessfulBuild/api/json");
         } catch (Exception exception) {
             return;
         }
@@ -41,8 +39,8 @@ public class UpdateChecker {
             return;
         }
 
-        int currentVersion = Integer.parseInt(currentBuild.replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
-        int latestVersion = Integer.parseInt(getLatestBuild().replace("v", "").replace(".", "").replaceAll("[^0-9]", ""));
+        int currentVersion = Integer.parseInt(currentBuild);
+        int latestVersion = Integer.parseInt(getLatestBuild());
 
         if (currentVersion != latestVersion) updateCheckResult = UpdateCheckResult.OUT_DATED;
         else if (currentVersion == latestVersion) updateCheckResult = UpdateCheckResult.UP_TO_DATE;
@@ -75,13 +73,24 @@ public class UpdateChecker {
 
     public void fetchLatestBuild() {
         try {
-            URLConnection urlConnection = getResourceRestApiUrl().openConnection();
+            HttpURLConnection urlConnection = (HttpURLConnection) getResourceRestApiUrl().openConnection();
+            urlConnection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
             urlConnection.connect();
 
-            JsonParser jp = new JsonParser();
-            JsonElement root = jp.parse(new InputStreamReader((InputStream) urlConnection.getContent()));
-            JsonObject rootobj = root.getAsJsonObject();
-            latestBuild = rootobj.get("number").getAsString();
+            int responseCode = urlConnection.getResponseCode();
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = bufferedReader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            bufferedReader.close();
+
+            System.out.println(response.toString());
+
+            JSONObject jsonObject = new JSONObject(response.toString());
+            System.out.println(jsonObject.getString("id"));
 
         } catch (Exception exception) {
             exception.printStackTrace();

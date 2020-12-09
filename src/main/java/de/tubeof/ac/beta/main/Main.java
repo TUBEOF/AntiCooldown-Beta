@@ -43,8 +43,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aThe Plugin will be activated ...");
-
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cWARNING! THIS IS A BETA BUILD!");
+
+        checkPluginFileName();
 
         main = this;
 
@@ -80,6 +81,15 @@ public class Main extends JavaPlugin {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aThe plugin was successfully deactivated!");
     }
 
+    private void checkPluginFileName() {
+        File file = new File("plugins/AntiCooldown-Beta-jar-with-dependencies.jar");
+        if(file == null) return;
+        else {
+            ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cYou MUST rename the plugin-file from §eAntiCooldown-Beta-jar-with-dependencies.jar §cto §eAntiCooldown-Beta.jar§c!");
+            Bukkit.getServer().shutdown();
+        }
+    }
+
     private void checkTubeTils() {
         Plugin tubetils = pluginManager.getPlugin("TubeTils");
         if(tubetils == null) {
@@ -95,6 +105,8 @@ public class Main extends JavaPlugin {
         try {
             URL url = new URL("https://repo.tubeof.de/de/tubeof/tubetils/SNAPSHOT-412/tubetils-SNAPSHOT-412.jar");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
+            connection.setRequestProperty("Header-Token", "SD998FS0FG07");
             int filesize = connection.getContentLength();
 
             Timer timer = new Timer();

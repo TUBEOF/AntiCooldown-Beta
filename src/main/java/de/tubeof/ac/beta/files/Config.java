@@ -19,7 +19,7 @@ public class Config {
     private static Messages messages = Main.getMessages();
     private static Data data = Main.getData();
 
-    private static File file = new File("plugins/AntiCooldown", "Config.yml");
+    private static File file = new File("plugins/AntiCooldown-Beta", "Config.yml");
     private static FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
     public static void configUpdateMessage() {

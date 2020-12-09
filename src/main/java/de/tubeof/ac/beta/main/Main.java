@@ -225,7 +225,7 @@ public class Main extends JavaPlugin {
     private void bStats() {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aLoad and activate bStats ...");
 
-        Metrics metrics = new Metrics(this, 3440);
+        Metrics metrics = new Metrics(this, 9604);
 
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§abStats was successfully loaded and activated!");
     }

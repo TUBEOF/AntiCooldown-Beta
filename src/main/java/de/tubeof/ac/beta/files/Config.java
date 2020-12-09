@@ -59,6 +59,7 @@ public class Config {
         cfg.addDefault("Settings.Values.AttackSpeed", 100);
         cfg.addDefault("Settings.Features.DisableSweepAttacks", true);
         cfg.addDefault("Settings.Updates.UseUpdateChecker", true);
+        cfg.addDefault("Settings.Updates.AutoUpdate", true);
         cfg.addDefault("Settings.Updates.ConsoleNotify", true);
         cfg.addDefault("Settings.Updates.IngameNotify", true);
 
@@ -102,6 +103,7 @@ public class Config {
         data.setBooleanSettings(SettingsType.USE_UPDATE_CHECKER, cfg.getBoolean("Settings.Updates.UseUpdateChecker"));
         data.setBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE, cfg.getBoolean("Settings.Updates.ConsoleNotify"));
         data.setBooleanSettings(SettingsType.UPDATE_NOTIFY_INGAME, cfg.getBoolean("Settings.Updates.IngameNotify"));
+        data.setBooleanSettings(SettingsType.UPDATE_AUTO_UPDATE, cfg.getBoolean("Settings.Updates.AutoUpdate"));
         data.setBooleanSettings(SettingsType.DISABLE_SWEEP_ATTACK, cfg.getBoolean("Settings.Features.DisableSweepAttacks"));
         data.setIntegerSettings(SettingsType.ATTACK_SPEED_VALUE, cfg.getInt("Settings.Values.AttackSpeed"));
 

@@ -15,6 +15,7 @@ public class Data {
     private boolean useUpdateChecker;
     private boolean updateNotifyConsole;
     private boolean updateNotifyIngame;
+    private boolean updateAutoDownload;
     private boolean disableSweepAttacks;
     private int attackSpeedValue;
     private int configVersion;

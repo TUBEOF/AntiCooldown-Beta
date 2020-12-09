@@ -1,5 +1,6 @@
 package de.tubeof.ac.beta.utils;
 
+import de.tubeof.ac.beta.data.Data;
 import de.tubeof.ac.beta.data.Messages;
 import de.tubeof.ac.beta.enums.MessageType;
 import de.tubeof.ac.beta.main.Main;
@@ -13,12 +14,12 @@ import java.net.URL;
 
 public class UpdateChecker {
 
-    private final Messages messages = Main.getMessages();
+    private final Data data = Main.getData();
 
     private String resourceName;
     private URL resourceRestApiUrl;
-    private String currentBuild;
-    private String latestBuild;
+    private Integer currentBuild;
+    private Integer latestBuild;
     private UpdateCheckResult updateCheckResult;
 
     public UpdateChecker(String resourceName, Plugin plugin) {
@@ -29,20 +30,18 @@ public class UpdateChecker {
             return;
         }
 
-        fetchLatestBuild();
-
-        currentBuild = messages.getTextMessage(MessageType.BUILD);
-        latestBuild = getLatestBuild();
+        currentBuild = data.getCurrentBuild();
+        latestBuild = fetchLatestBuild();
 
         if (latestBuild == null) {
             updateCheckResult = UpdateCheckResult.NO_RESULT;
             return;
         }
 
-        int currentVersion = Integer.parseInt(currentBuild);
-        int latestVersion = Integer.parseInt(getLatestBuild());
+        int currentVersion = currentBuild;
+        int latestVersion = latestBuild;
 
-        if (currentVersion != latestVersion) updateCheckResult = UpdateCheckResult.OUT_DATED;
+        if (currentBuild != getLatestBuild()) updateCheckResult = UpdateCheckResult.OUT_DATED;
         else if (currentVersion == latestVersion) updateCheckResult = UpdateCheckResult.UP_TO_DATE;
         else updateCheckResult = UpdateCheckResult.UNRELEASED;
     }
@@ -59,11 +58,11 @@ public class UpdateChecker {
         return resourceRestApiUrl;
     }
 
-    public String getCurrentBuild() {
+    public Integer getCurrentBuild() {
         return currentBuild;
     }
 
-    public String getLatestBuild() {
+    public Integer getLatestBuild() {
         return latestBuild;
     }
 
@@ -71,13 +70,11 @@ public class UpdateChecker {
         return updateCheckResult;
     }
 
-    public void fetchLatestBuild() {
+    public Integer fetchLatestBuild() {
         try {
             HttpURLConnection urlConnection = (HttpURLConnection) getResourceRestApiUrl().openConnection();
             urlConnection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
             urlConnection.connect();
-
-            int responseCode = urlConnection.getResponseCode();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String inputLine;
@@ -87,13 +84,11 @@ public class UpdateChecker {
             }
             bufferedReader.close();
 
-            System.out.println(response.toString());
-
             JSONObject jsonObject = new JSONObject(response.toString());
-            System.out.println(jsonObject.getString("id"));
-
+            return jsonObject.getInt("id");
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+        return null;
     }
 }

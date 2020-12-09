@@ -18,6 +18,7 @@ public class Data {
     private boolean disableSweepAttacks;
     private int attackSpeedValue;
     private int configVersion;
+    private int currentBuild;
     private ArrayList<String> disabledWorlds = new ArrayList<>();
 
     public void setBooleanSettings(SettingsType settingsType, boolean bol) {
@@ -86,5 +87,13 @@ public class Data {
 
     public int getConfigVersion() {
         return configVersion;
+    }
+
+    public void setCurrentBuild(int build) {
+        currentBuild = build;
+    }
+
+    public int getCurrentBuild() {
+        return currentBuild;
     }
 }

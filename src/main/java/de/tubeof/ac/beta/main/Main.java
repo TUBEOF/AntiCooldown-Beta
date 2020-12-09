@@ -192,7 +192,7 @@ public class Main extends JavaPlugin {
         }
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.OUT_DATED) {
             data.setUpdateAvailable(true);
-            if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found!");
+            if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found! You are using §eBuild " + updateChecker.getCurrentBuild() + "§c. Latest Build is §e" + updateChecker.getLatestBuild() + "§c!");
 
             //DO DOWNLOAD
             return;

@@ -96,8 +96,6 @@ public class Config {
         messages.setTextMessages(MessageType.ERROR_PLAYER_NOT_ONLINE, cfg.getString("Messages.Error.PlayerNotOnline"));
         messages.setTextMessages(MessageType.ERROR_NO_PERMISSIONS, cfg.getString("Messages.Error.NoPerms"));
 
-        messages.setTextMessages(MessageType.BUILD, cfg.getString("Build"));
-
         //Settings
         data.setBooleanSettings(SettingsType.USE_LOGIN_MESSAGES, cfg.getBoolean("Settings.Messages.UseLoginMessage"));
         data.setBooleanSettings(SettingsType.USE_SWITCH_WORLD_MESSAGES, cfg.getBoolean("Settings.Messages.UseSwitchWorldMessage"));
@@ -108,6 +106,7 @@ public class Config {
         data.setIntegerSettings(SettingsType.ATTACK_SPEED_VALUE, cfg.getInt("Settings.Values.AttackSpeed"));
 
         data.setConfigVersion(cfg.getInt("ConfigVersion"));
+        data.setCurrentBuild(cfg.getInt("Build"));
 
         for (String disabledWorld : cfg.getStringList("Settings.DisabledWorlds")) {
             data.addDisableWorldToCache(disabledWorld);

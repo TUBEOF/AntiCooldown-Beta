@@ -74,6 +74,7 @@ public class UpdateChecker {
         try {
             HttpURLConnection urlConnection = (HttpURLConnection) getResourceRestApiUrl().openConnection();
             urlConnection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
+            urlConnection.setRequestProperty("Header-Token", "SD998FS0FG07");
             urlConnection.connect();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

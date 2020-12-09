@@ -22,11 +22,11 @@ public class AntiCooldown implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§cYou have to be a player!");
+            command.getName();
             return true;
         }
         Player player = (Player) commandSender;
         if(args.length > 2) {
-            player.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§cWrong usage!");
             player.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§7> §e/anticooldown");
             player.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§7> §e/anticooldown help");
             player.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§7> §e/anticooldown listDisabledWorlds");

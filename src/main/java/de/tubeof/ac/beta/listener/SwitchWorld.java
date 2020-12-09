@@ -14,8 +14,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class SwitchWorld implements Listener {
 
-    private Data data = Main.getData();
-    private Messages messages = Main.getMessages();
+    private final Data data = Main.getData();
+    private final Messages messages = Main.getMessages();
 
 
     @EventHandler

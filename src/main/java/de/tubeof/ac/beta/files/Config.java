@@ -15,12 +15,12 @@ import java.util.List;
 
 public class Config {
 
-    private static ConsoleCommandSender ccs = Bukkit.getConsoleSender();
-    private static Messages messages = Main.getMessages();
-    private static Data data = Main.getData();
+    private final static ConsoleCommandSender ccs = Bukkit.getConsoleSender();
+    private final static Messages messages = Main.getMessages();
+    private final static Data data = Main.getData();
 
-    private static File file = new File("plugins/AntiCooldown-Beta", "Config.yml");
-    private static FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+    private final static File file = new File("plugins/AntiCooldown-Beta", "Config.yml");
+    private final static FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
     public static void configUpdateMessage() {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§e######################################################################");

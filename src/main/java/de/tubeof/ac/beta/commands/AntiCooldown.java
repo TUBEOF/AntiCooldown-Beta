@@ -15,14 +15,13 @@ import org.bukkit.entity.Player;
 
 public class AntiCooldown implements CommandExecutor {
 
-    private Messages messages = Main.getMessages();
-    private Data data = Main.getData();
+    private final Messages messages = Main.getMessages();
+    private final Data data = Main.getData();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage(messages.getTextMessage(MessageType.PREFIX) + "§cYou have to be a player!");
-            command.getName();
             return true;
         }
         Player player = (Player) commandSender;

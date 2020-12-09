@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class SweepAttack implements Listener {
 
-    private Data data = Main.getData();
+    private final Data data = Main.getData();
 
     @EventHandler
     public void onSweep(EntityDamageByEntityEvent event) {

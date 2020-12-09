@@ -15,7 +15,7 @@ public class UpdateChecker {
     private String latestVersionString;
     private UpdateCheckResult updateCheckResult;
 
-    public UpdateChecker(int resourceId, Plugin plugin) {
+    public UpdateChecker(Integer resourceId, Plugin plugin) {
         try {
             this.resourceId = resourceId;
             this.resourceURL = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resourceId);

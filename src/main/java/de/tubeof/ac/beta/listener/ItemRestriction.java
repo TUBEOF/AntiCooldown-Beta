@@ -21,7 +21,6 @@ public class ItemRestriction implements Listener {
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
         if(item == null) return;
 
-        Bukkit.broadcastMessage(item.toString());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -30,7 +29,6 @@ public class ItemRestriction implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(item == null) return;
 
-        Bukkit.broadcastMessage(item.toString());
     }
 
     @SuppressWarnings("deprecation")
@@ -43,7 +41,6 @@ public class ItemRestriction implements Listener {
             ItemStack item = player.getInventory().getItemInMainHand();
             if(item == null) return;
 
-            Bukkit.broadcastMessage(item.toString());
         }, 1);
     }
 }

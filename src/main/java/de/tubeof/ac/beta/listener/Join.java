@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Join implements Listener {
 
-    private Data data = Main.getData();
-    private Messages messages = Main.getMessages();
+    private final Data data = Main.getData();
+    private final Messages messages = Main.getMessages();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {

@@ -6,7 +6,7 @@ public class Messages {
 
     public Messages() {}
 
-    private String startupPrefix = "§7[§3AntiCooldownLogger§7] ";
+    private final String startupPrefix = "§7[§3AntiCooldownLogger§7] ";
     private String prefix;
 
     private String switchWorldDisabled;

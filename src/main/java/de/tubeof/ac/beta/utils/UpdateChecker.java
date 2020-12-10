@@ -2,7 +2,6 @@ package de.tubeof.ac.beta.utils;
 
 import de.tubeof.ac.beta.data.Data;
 import de.tubeof.ac.beta.main.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.json.JSONObject;
 

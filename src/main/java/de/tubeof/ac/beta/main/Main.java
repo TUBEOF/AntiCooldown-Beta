@@ -78,10 +78,10 @@ public class Main extends JavaPlugin {
 
     private void checkPluginFileName() {
         File file = new File("plugins/AntiCooldown-Beta-jar-with-dependencies.jar");
-        if(file == null) return;
+        if(!file.exists()) return;
         else {
             ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cYou MUST rename the plugin-file from §eAntiCooldown-Beta-jar-with-dependencies.jar §cto §eAntiCooldown-Beta.jar§c!");
-            Bukkit.getServer().shutdown();
+            pluginManager.disablePlugin(this);
         }
     }
 

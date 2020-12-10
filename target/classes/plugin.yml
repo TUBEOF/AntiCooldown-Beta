@@ -1,5 +1,5 @@
 name: AntiCooldown-Beta
-version: 52
+version: 51
 api-version: 1.14
 softdepend: [TubeTils]
 main: de.tubeof.ac.beta.main.Main

@@ -1,5 +1,6 @@
 package de.tubeof.ac.beta.main;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.tubeof.ac.beta.commands.AntiCooldown;
 import de.tubeof.ac.beta.data.Data;
 import de.tubeof.ac.beta.data.Messages;
@@ -31,8 +32,10 @@ public class Main extends JavaPlugin {
 
     private final static Messages messages = new Messages();
     private final static Data data = new Data();
+
     private final ConsoleCommandSender ccs = Bukkit.getConsoleSender();
     private final PluginManager pluginManager = Bukkit.getPluginManager();
+
     private static Object cacheContainer;
     private static Main main;
 
@@ -148,6 +151,17 @@ public class Main extends JavaPlugin {
             ccs.sendMessage("Error while enabling TubeTils! Stopping AntiCooldown ...");
             pluginManager.disablePlugin(this);
         }
+    }
+
+    private void setupCache() {
+        ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aCreating Cache Container ...");
+
+        cacheContainer = new CacheContainer("AntiCooldown-Beta::VERSION-" + getDescription().getVersion() + "::SNAPSHOT-" + getDescription().getAPIVersion());
+        getCacheContainer().registerCacheType(Integer.class);
+        getCacheContainer().registerCacheType(Boolean.class);
+        getCacheContainer().registerCacheType(String.class);
+
+        ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aCache Container was successfully created!");
     }
 
     private void manageConfigs() {

@@ -29,16 +29,14 @@ import java.util.TimerTask;
 
 public class Main extends JavaPlugin {
 
-
     private final static Messages messages = new Messages();
     private final static Data data = new Data();
-    private static Main main;
-
     private final ConsoleCommandSender ccs = Bukkit.getConsoleSender();
     private final PluginManager pluginManager = Bukkit.getPluginManager();
+    private static Object cacheContainer;
+    private static Main main;
 
     private float downloadProgress = 0;
-    private static Object cacheContainer;
 
     @Override
     public void onEnable() {

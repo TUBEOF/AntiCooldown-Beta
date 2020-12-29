@@ -6,7 +6,7 @@
 
     <groupId>de.tubeof.anticooldown</groupId>
     <artifactId>AntiCooldown-Beta</artifactId>
-    <version>BETA</version>
+    <version>SNAPSHOT-XXX</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -46,9 +46,5 @@
             <version>20201115</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>AntiCooldown-Beta</finalName>
-    </build>
 
 </project>

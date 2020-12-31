@@ -202,6 +202,7 @@ public class Main extends JavaPlugin {
         }
 
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aChecking for updates ...");
+
         UpdateChecker updateChecker = new UpdateChecker("AntiCooldown-Beta", this);
 
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.UP_TO_DATE) {

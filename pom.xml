@@ -36,8 +36,8 @@
         </dependency>
         <dependency>
             <groupId>de.tubeof</groupId>
-            <artifactId>tubetils</artifactId>
-            <version>SNAPSHOT-412</version>
+            <artifactId>TubeTils</artifactId>
+            <version>SNAPSHOT-12</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -18,7 +18,7 @@
     <repositories>
         <repository>
             <id>repo.tubeof</id>
-            <url>https://repo.tubeof.de</url>
+            <url>https://hub.tubeof.de/repo/</url>
         </repository>
 
         <repository>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>de.tubeof</groupId>
             <artifactId>TubeTils</artifactId>
-            <version>SNAPSHOT-12</version>
+            <version>SNAPSHOT-16</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

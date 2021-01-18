@@ -99,7 +99,7 @@ public class Main extends JavaPlugin {
 
     private void getTubeTils() {
         try {
-            URL url = new URL("https://repo.tubeof.de/de/tubeof/tubetils/SNAPSHOT-412/tubetils-SNAPSHOT-412.jar");
+            URL url = new URL("https://hub.tubeof.de/repo/de/tubeof/TubeTils/SNAPSHOT-16/TubeTils-SNAPSHOT-16.jar");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
             connection.setRequestProperty("Header-Token", "SD998FS0FG07");

@@ -216,7 +216,7 @@ public class Main extends JavaPlugin {
             if(data.getBooleanSettings(SettingsType.UPDATE_AUTO_UPDATE)) {
 
                 try {
-                    URL url = new URL("https://jenkins.tubeof.de/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-jar-with-dependencies.jar");
+                    URL url = new URL("https://hub.tubeof.de/jenkins/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-SNAPSHOT-" + updateChecker.getLatestBuild() + ".jar");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
                     connection.setRequestProperty("Header-Token", "SD998FS0FG07");

@@ -20,7 +20,7 @@ public class UpdateChecker {
     public UpdateChecker(String resourceName, Plugin plugin) {
         try {
             this.resourceName = resourceName;
-            this.resourceRestApiUrl = new URL("https://jenkins.tubeof.de/job/" + resourceName + "/lastSuccessfulBuild/api/json");
+            this.resourceRestApiUrl = new URL("https://hub.tubeof.de/jenkins/job/" + resourceName + "/lastSuccessfulBuild/api/json");
         } catch (Exception exception) {
             return;
         }

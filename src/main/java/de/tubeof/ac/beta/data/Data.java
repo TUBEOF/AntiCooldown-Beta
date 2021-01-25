@@ -9,6 +9,8 @@ public class Data {
 
     public Data() {}
 
+    private boolean skipUpdateDueFileName = false;
+
     private boolean useSwitchWorldMessage;
     private boolean useLoginMessage;
     private boolean isUpdateAvailable;
@@ -89,5 +91,13 @@ public class Data {
 
     public int getConfigVersion() {
         return configVersion;
+    }
+
+    public void setSkipUpdateDueFileName(Boolean bol) {
+        skipUpdateDueFileName = bol;
+    }
+
+    public boolean getSkipUpdateDueFileName() {
+        return skipUpdateDueFileName;
     }
 }

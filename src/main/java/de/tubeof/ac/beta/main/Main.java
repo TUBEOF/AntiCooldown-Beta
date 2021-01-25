@@ -73,11 +73,11 @@ public class Main extends JavaPlugin {
     }
 
     private void checkPluginFileName() {
-        File file = new File("plugins/AntiCooldown-Beta-jar-with-dependencies.jar");
-        if(!file.exists()) return;
+        File file = new File("plugins/AntiCooldown-Beta.jar");
+        if(file.exists()) return;
         else {
-            ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cYou MUST rename the plugin-file from §eAntiCooldown-Beta-jar-with-dependencies.jar §cto §eAntiCooldown-Beta.jar§c!");
-            pluginManager.disablePlugin(this);
+            ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cWARNING: Auto-Update are disabled! Please rename the plugin-file to §eAntiCooldown-Beta.jar§c!");
+            data.setSkipUpdateDueFileName(true);
         }
     }
 
@@ -210,6 +210,10 @@ public class Main extends JavaPlugin {
             data.setUpdateAvailable(true);
             if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found! You are using §eBuild " + updateChecker.getCurrentBuild() + "§c. Latest Build is §e" + updateChecker.getLatestBuild() + "§c!");
             if(data.getBooleanSettings(SettingsType.UPDATE_AUTO_UPDATE)) {
+                if(data.getSkipUpdateDueFileName()) {
+                    ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAuto-Update is disabled! Manual intervention required: You have to rename the plugin-file to §eAntiCooldown-Beta.jar§c.");
+                    return;
+                }
 
                 try {
                     URL url = new URL("https://hub.tubeof.de/jenkins/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-SNAPSHOT-" + updateChecker.getLatestBuild() + ".jar");

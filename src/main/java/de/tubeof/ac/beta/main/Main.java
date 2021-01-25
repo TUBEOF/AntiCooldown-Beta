@@ -200,6 +200,7 @@ public class Main extends JavaPlugin {
         ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§aChecking for updates ...");
 
         UpdateChecker updateChecker = new UpdateChecker("AntiCooldown-Beta", this);
+        String downloadUrl = "https://hub.tubeof.de/jenkins/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-SNAPSHOT-" + updateChecker.getLatestBuild() + ".jar";
 
         if(updateChecker.getUpdateCheckResult() == UpdateChecker.UpdateCheckResult.UP_TO_DATE) {
             data.setUpdateAvailable(false);
@@ -211,12 +212,12 @@ public class Main extends JavaPlugin {
             if(data.getBooleanSettings(SettingsType.UPDATE_NOTIFY_CONSOLE)) ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAn update was found! You are using §eBuild " + updateChecker.getCurrentBuild() + "§c. Latest Build is §e" + updateChecker.getLatestBuild() + "§c!");
             if(data.getBooleanSettings(SettingsType.UPDATE_AUTO_UPDATE)) {
                 if(data.getSkipUpdateDueFileName()) {
-                    ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAuto-Update is disabled! Manual intervention required: You have to rename the plugin-file to §eAntiCooldown-Beta.jar§c.");
+                    ccs.sendMessage(messages.getTextMessage(MessageType.STARTUP_PREFIX) + "§cAuto-Update is disabled! Manual intervention required: You have to rename the plugin-file to §eAntiCooldown-Beta.jar§c. You can manually download the latest build here: §e" + downloadUrl);
                     return;
                 }
 
                 try {
-                    URL url = new URL("https://hub.tubeof.de/jenkins/job/AntiCooldown-Beta/lastSuccessfulBuild/artifact/target/AntiCooldown-Beta-SNAPSHOT-" + updateChecker.getLatestBuild() + ".jar");
+                    URL url = new URL(downloadUrl);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestProperty("User-Agent", "TubeApiBridgeConnector");
                     connection.setRequestProperty("Header-Token", "SD998FS0FG07");

@@ -20,9 +20,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Timer;
@@ -118,8 +116,8 @@ public class Main extends JavaPlugin {
             thread.start();
 
             float totalDataRead = 0;
-            java.io.BufferedInputStream in = new java.io.BufferedInputStream(connection.getInputStream());
-            java.io.FileOutputStream fos = new java.io.FileOutputStream("plugins/TubeTils.jar");
+            BufferedInputStream in = new java.io.BufferedInputStream(connection.getInputStream());
+            FileOutputStream fos = new java.io.FileOutputStream("plugins/TubeTils.jar");
             BufferedOutputStream bout = new BufferedOutputStream(fos,1024);
             byte[] data = new byte[1024];
             int i = 0;

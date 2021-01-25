@@ -1,6 +1,5 @@
 package de.tubeof.ac.beta.main;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import de.tubeof.ac.beta.commands.AntiCooldown;
 import de.tubeof.ac.beta.data.Data;
 import de.tubeof.ac.beta.data.Messages;
@@ -36,8 +35,6 @@ public class Main extends JavaPlugin {
 
     private static Object cacheContainer;
     private static Main main;
-
-    private float downloadProgress = 0;
 
     @Override
     public void onEnable() {
@@ -95,6 +92,7 @@ public class Main extends JavaPlugin {
         }
     }
 
+    private float downloadProgress = 0;
     private void getTubeTils() {
         try {
             URL url = new URL("https://hub.tubeof.de/repo/de/tubeof/TubeTils/SNAPSHOT-16/TubeTils-SNAPSHOT-16.jar");

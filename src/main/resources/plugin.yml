@@ -2,7 +2,7 @@ name: AntiCooldown-Beta
 version: 53
 api-version: 1.14
 softdepend: [TubeTils]
-main: de.tubeof.ac.beta.main.Main
+main: com.yourgamespace.anticooldown.beta.main.Main
 commands:
   anticooldown:
     usage: </command>
